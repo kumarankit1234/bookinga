@@ -1,0 +1,426 @@
+.main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        flex: 0 0 auto;
+        position: sticky;
+        top: 0;
+        padding: 8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid $brand-disable;
+        
+        &__left {
+            display: flex;
+            align-items: center;            
+        }
+
+        &__icon {
+            img { 
+                width: 40px;
+            }
+        }
+
+        &__title {
+            padding: 0 10px;
+            opacity: 0.6;
+        }
+    }
+
+    .page-body {
+        display: flex;
+        flex-grow: 1;
+        
+        .sidebar {
+            flex: 0 0 200px;     
+            border-right: 1px solid $border-color;
+            padding: 20px 8px;
+            
+            .menu__item {
+                font-size: $font-size-h3;
+                cursor: pointer;
+                padding: 5px;
+
+                &:hover, &-active {
+                    background: $brand-primary;
+                    color: white;
+                }
+            }
+        }
+
+        .schedule {
+            display: flex;
+            flex-grow: 1;
+            max-width: calc(100% - 200px);
+
+            .rooms-container {
+                flex: 0 0 200px;    
+                padding: 69px 0px; 
+                border-right: 1px solid $brand-disable;               
+            }
+
+            .bookings {
+                flex-grow: 1
+            }
+            
+        }        
+
+        .rooms-container {
+            .room {
+                height: 43px;
+                display: flex;
+                align-items: center;
+                border-bottom: 2px solid $brand-disable;
+                padding: 0 8px;
+                font-size: $font-size-h3;
+            }            
+        }
+        .rooms-body:nth-child(1) {
+            border-top: 1px solid $brand-disable;            
+        }
+
+        .bookings {
+            overflow-x: auto;
+
+            &-daily {
+                .day {
+                    display: flex;
+                    flex-direction: column;
+
+                    &__header {
+                        display: flex;
+                        border-bottom: 1px solid $brand-disable;
+
+                        .am-pm {
+                            font-size: 12px;
+                            font-style: italic;
+                        }
+                    }     
+                    
+                    &__body {
+                        display: flex;
+                        flex-direction: column;
+
+                        &__room {
+                            display: flex;
+                            border-top: 1px solid $brand-disable;
+                            border-bottom: 1px solid $brand-disable;
+                            
+
+                            &__minutes {
+                                position: relative;
+                                width: 30px;
+                                height: 41px;
+                                border-right: 1px solid $brand-disable;
+                                cursor: pointer;
+
+                                &:hover {
+                                    box-shadow: -1px -1px 5px darken($brand-disable, 10%), 1px 1px 5px darken($brand-disable, 10%);
+
+                                    .booking-add-icon {
+                                        display: block;
+                                    }
+                                }
+
+                                &-booking-starts {
+                                    background: $brand-tertiary;
+                                    color: white;
+                                    padding: 2px;
+                                    border: 1px solid darken($brand-tertiary, 5%);
+                                    border-radius: 2px;
+                                    z-index: 100;
+                                }
+
+                                &-booking-exists {
+                                    border: none;
+                                    &:hover {
+                                        box-shadow: none
+                                    };
+                                }
+                            }
+
+                            .booking-add-icon {
+                                display: none;
+                                position: absolute;
+                                bottom: 0;
+                                right: 0;
+                                left: 0;
+                                top: 0;
+                                text-align: center;
+                                font-size: $font-size-h1;
+                                color: $brand-primary;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            .hour {
+                display: flex;
+                flex-direction: column;                
+                box-shadow: 2px 0 2px $brand-secondary;
+
+                &__minutes {
+                    display: flex;                    
+                }
+
+                &__value {
+                    padding: 5px 0 0 5px;
+                    font-size: $font-size-h2;
+                }
+
+                .minutes {
+                    padding: 5px 7px;
+                }
+            }
+
+            
+        }
+
+        .manage {
+            display: flex;
+            width: 100%;
+            overflow-y: hidden;
+
+            &__sections-name {
+                flex: 0 0 200px;
+                border-right: 1px solid $brand-secondary;
+            }
+
+            &__sections-body {
+                flex: 1;      
+                overflow-y: auto;          
+            }
+
+            .sections-body-rooms {
+                padding: 20px 15px;
+                .rooms-details {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+
+                    
+                }
+
+                .room-detail {
+                    width: 260px;
+                    height: 400px;
+                    padding: 8px;
+                    margin-bottom: 15px;
+                    margin-right: 10px;
+                    border: 1px solid $brand-disable;
+                    border-radius: 5px;
+
+                    
+                    &:hover {
+                        img {
+                            transform: scale(1.02);
+                        }                                            
+                    }
+                    
+                    box-shadow: -1px -1px 5px lighten($brand-secondary, 10%), 1px 1px 5px lighten($brand-disable, 10%);
+                    
+
+                    &__image {
+                        height: 200px;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            transition: all .2s ease-in-out;
+                        }
+                    }
+
+                    &__name {
+                        margin-top: 10px;
+                        font-size: $font-size-h3;
+                        font-weight: $font-weight-bold;
+                    }
+
+                    &__key {
+                        font-weight: $font-weight-bold;
+                    }
+
+                    
+                }
+
+
+            }
+        }
+
+
+        
+    }
+
+}
+
+
+.booking-modal {
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-radius: 0;
+    }
+
+    &__header {
+        padding-bottom: 20px;
+        background: $brand-primary;
+        color: white;
+
+        &__title {
+            font-size: 24px;
+            padding: 20px 20px 0 20px;
+
+        }
+
+        &__date {
+            padding: 0 20px;
+        }
+    }
+
+    &__body {
+        padding: 20px;
+
+        &__title {
+            padding-bottom: 20px;
+        }
+
+        &__room {
+            padding-bottom: 20px;
+        }
+
+        &__time {
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            &-start, &-end {
+                flex: 0 0 45%;
+            }
+        }
+
+        &__desc {
+            textarea {
+                resize: none;
+            }
+        }
+    }
+}
+
+
+.add-room-modal {
+    width: 50%;
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-radius: 0;
+    }
+
+    &__header {
+        padding-bottom: 20px;
+        background: $brand-primary;
+        color: white;
+
+        &__title {
+            font-size: 24px;
+            padding: 20px 20px 0 20px;
+
+        }       
+    }
+
+    &__body {
+        padding: 20px;
+        $self: &;
+
+        &__main-info {
+            padding-bottom: 20px;
+            display: flex;            
+            justify-content: space-between;
+        }
+
+        &__name {
+            width: 47%;
+        }
+
+        &__max-capacity{
+            width: 47%;            
+        }
+
+        &__location {
+            padding-bottom: 20px;
+        }
+
+        &__desc {
+            padding-bottom: 20px;
+        }
+
+        textarea {
+            resize: none;
+        }
+    }
+}
+
+input {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid $brand-secondary;
+    color: black;
+    outline: none;
+
+    &:focus {
+        outline: 2px solid lighten($brand-primary, 30);
+    }
+    &::placeholder {
+        color: gray;
+    }
+}
+
+textarea {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid $brand-secondary;
+    color: black;
+    outline: none;
+
+    &:focus {
+        outline: 2px solid lighten($brand-primary, 30);
+    }
+    &::placeholder {
+        color: gray;
+    }
+}
+
+.bk-form-control {
+    .has-error {
+        input, textarea {
+            border: 1px solid $brand-danger;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+
+.react-resizable {
+    position: relative;
+}
+
+.react-resizable-handle {
+    position: absolute;
+    width: 20px;
+    height: 41px;
+    bottom: 0;
+    right: 0;    
+    cursor: ew-resize;
+}
